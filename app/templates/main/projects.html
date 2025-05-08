@@ -2,12 +2,22 @@
 
 {% block content %}
   <h1>My Projects</h1>
+<div id="tag-buttons">
+  <button  onclick="filterProjects('all')">
+    All
+  </button>
+  {% for tag in tags %}
+  <button onclick="filterProjects('{{ tag }}')">{{ tag }}</button>
+{% endfor %}
+</div>
+
   <div class="project-container">
     {% for project in projects %}
-      <div class="project-card">
-        <h3>{{ project.title }}</h3>
-        <p>{{ project.description }}</p>
-        <a href="{{ project.github_url }}" target="_blank">View on GitHub</a>
+      <div class="project-card" data-tags="{{project.language}}">
+        <h3>{{ project.name }}</h3>
+        <p>{{ project.description if project.description else 'No description provided.' }}</p>
+        <p><strong>{{project.language}}</strong></p>
+        <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer">View on GitHub</a>
       </div>
     {% endfor %}
   </div>
