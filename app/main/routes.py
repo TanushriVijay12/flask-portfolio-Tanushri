@@ -21,4 +21,4 @@ def projects():
         {"title": "Flask Blog", "description": "A blog built with Flask"},
         {"title": "Data Dashboard", "description": "Dashboard using Plotly and Flask"},
     ]
-    return render_template('main/contact.html')
+    return render_template('main/projects.html', projects=project_list)
