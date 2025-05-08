@@ -1,7 +1,9 @@
 # app/main/routes.py
 
-from flask import render_template
+from flask import render_template, flash, redirect, url_for
 from app.main import bp
+from app.forms import ContactForm
+from app.github_service import fetch_github_repos
 
 # Homepage
 @bp.route('/')
@@ -16,9 +18,16 @@ def about():
 # Projects Page
 @bp.route('/projects')
 def projects():
-    # Placeholder for project data
-    project_list = [
-        {"title": "Flask Blog", "description": "A blog built with Flask"},
-        {"title": "Data Dashboard", "description": "Dashboard using Plotly and Flask"},
-    ]
-    return render_template('main/projects.html', projects=project_list)
+    projects = fetch_github_repos()
+    tags = sorted(set([p['language'] for p in projects]))
+    
+    return render_template('main/projects.html', projects=projects, tags= tags)
+
+@bp.route('/contact', methods=['GET', 'POST'])
+def contact():
+    form = ContactForm()
+    if form.validate_on_submit():
+        # You can add logic here to send an email or save message
+        flash('Thank you for your message!', 'success')
+        return redirect(url_for('main.contact'))
+    return render_template('main/contact.html', form=form)
