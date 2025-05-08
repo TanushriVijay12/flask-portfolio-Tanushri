@@ -1,24 +1,25 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">  
-  <title>My Portfolio</title>
+  <title>Tanushri Portfolio</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <meta name="viewpoint" content="width-device-width, initial-scale=1.0">
 </head>
-<body>
-  <header>
-    <nav class="navbar">
-      <div class=""nav-container">
+<body class="dark-theme">
+  <header class="navbar">
+      <div class="container nav-flex">
+        <div class="logo">Tanu.</div>
         <a class="logo" href="{}">MyPortfolio</a>
           <ul class="nav links">
-            <li><a href="{{ url_for('main.home') }}">Home</a> |
+            <li><a href="{{ url_for('main.home') }}">Home</a>
               </li>
             <li><a href="{{ url_for('main.projects') }}">Projects</a></li>
             <li><a href="{{ url_for('main.contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('static', filename='TANUSHRI_VIJAYAKUMAR_RESUME_JAN25_tv233.pdf') }}" download>Resume</a>
+            </li>
           </ul>
       </div>
-    </nav>
   </header>
   <main class="content">
     {% block content %}{% endblock %}
